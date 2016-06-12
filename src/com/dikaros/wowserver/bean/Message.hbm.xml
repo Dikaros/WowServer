@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+       "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.dikaros.wowserver.bean.Message" table="message">
+		<id name="id" column="uid">
+			<generator class="native" />
+		</id>
+		<property name="senderId" column="senderid"/>
+		<property name="receiverId" column="receiverid"/>
+		<property name="time" column="time" />
+		<property name="msg" column="message"></property>
+		<property name="type" column="type"></property>
+
+	</class>
+
+</hibernate-mapping>

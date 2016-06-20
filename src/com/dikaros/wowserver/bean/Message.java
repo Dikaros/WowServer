@@ -1,10 +1,12 @@
 package com.dikaros.wowserver.bean;
 
 
+import java.io.Serializable;
+
 import com.google.gson.Gson;
 
 
-public class Message {
+public class Message implements Serializable{
 	
 	public Message(long senderId, long receiverId, long time, String msg,int type) {
 		super();

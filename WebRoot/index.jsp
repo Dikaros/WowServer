@@ -29,16 +29,16 @@
 	<h4>移动端发送jsonFile测试</h4>
 	<div>
 		表单一(移动客户端登录)
-		<form action="login.do" method="post">
+		<form action="login.do" method="get">
 			jsonFile:<input type="text" name="jsonFile"
 				style="width:200px;margin-top:5px"
-				value='jsonFile:{"phone":"123","password":"222"}'> <input
+				value='jsonFile:[{"phone":"123","password":"123"}]'> <input
 				type="submit" value="提交">
 		</form>
 	</div>
 	<div>
 		表单二(移动客户端注册)
-		<form action="<%=path%>/user/regist.action" method="post">
+		<form action="regist.do" method="get">
 			jsonFile:<input type="text" name="jsonFile"
 				style="width:200px;margin-top:5px"
 				value='[{"phone":"123","password":"222"}]'> <input
@@ -48,7 +48,7 @@
 	<h4>网页测试</h4>
 	<div>
 		表单三(网页登录)
-		<form action="<%=path%>/webuser/login.action" method="post">
+		<form action="<%=path%>/login.do" method="get">
 			<table style="text-align:left">
 				<tr>
 					<th>用户名：</th>
@@ -64,7 +64,7 @@
 	</div>
 	<div>
 		表单四(网页注册)
-		<form action="<%=path%>/webuser/regist.action" method="post">
+		<form action="<%=path%>/regist.do" method="post">
 			<table style="text-align:left">
 				<tr>
 					<th>用户名：</th>
@@ -93,7 +93,7 @@
 
 
 	<script language="javascript" type="text/javascript">
-		var wsUrl = "ws://127.0.0.1:8080/WowServer/websocket?userName=456&userPassword=456";
+		var wsUrl = "ws://127.0.0.1:8080/WowServer/websocket?userId=2";
 		var output;
 		var sendMessage;
 		var sendForm;

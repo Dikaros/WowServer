@@ -43,4 +43,13 @@
 	    <code>301</code>
 	    <message>上传失败</message>
 	</result>
+	
+	<result id="400">
+	    <code>400</code>
+	    <message>增加成功</message>
+	</result>
+	<result id="401">
+	    <code>401</code>
+	    <message>增加成功</message>
+	</result>
 </results>

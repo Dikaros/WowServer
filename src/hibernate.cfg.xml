@@ -27,8 +27,9 @@
 		<property name="hibernate.c3p0.timeout">1800</property>
 		<!-- c3p0缓存 Statement的数量数 -->
 		<property name="hibernate.c3p0.max_statements">50</property>
-		<mapping resource="com/dikaros/wowserver/bean/User.hbm.xml" />
+		<mapping resource="com/dikaros/wowserver/bean/Friend.hbm.xml" />
 		<mapping resource="com/dikaros/wowserver/bean/Message.hbm.xml" />
+		<mapping resource="com/dikaros/wowserver/bean/User.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

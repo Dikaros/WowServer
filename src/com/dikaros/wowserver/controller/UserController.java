@@ -8,12 +8,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import antlr.collections.List;
+
+import com.dikaros.wowserver.bean.Friend;
+import com.dikaros.wowserver.bean.FriendView;
 import com.dikaros.wowserver.bean.User;
+import com.dikaros.wowserver.dao.impl.FriendDao;
 import com.dikaros.wowserver.dao.impl.UserDao;
 import com.dikaros.wowserver.util.ResultUtil;
 import com.dikaros.wowserver.websocket.SessionCenter;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import dikaros.json.JsonExtendedUtil;
+import dikaros.org.json.JSONArray;
+import dikaros.org.json.JSONObject;
 
 @Controller
 public class UserController {
@@ -48,12 +57,12 @@ public class UserController {
 		String jsonResult = ResultUtil.getResultById(code).toJson();
 		if (code == 101) {
 			String userJson = user.toJson();
-			jsonResult = userJson.substring(0, userJson.length() - 2) + ","
-					+ "\"sessionId\":" + session.getId() + ","
+			
+			
+			jsonResult = userJson.substring(0, userJson.length() - 1) + ","
+					+ "\"sessionId\":\"" + session.getId() + "\",\""
 					+ jsonResult.substring(2);
-			// 将用户session保存到sessionCenter中
-			SessionCenter.userIdToHttpSessionMap.put(user.getId() + "",
-					session.getId());
+			
 		}
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(jsonResult);
@@ -86,6 +95,60 @@ public class UserController {
 		String jsonResult = ResultUtil.getResultById(code).toJson();
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(jsonResult);
+	}
+	
+	/**
+	 * 增加好友
+	 * @param jsonFile
+	 * @param response
+	 */
+	@RequestMapping("/friend/add")
+	public void addFriend(String jsonFile,HttpServletResponse response){
+		Gson gson = new Gson();
+		Friend friend = gson.fromJson(jsonFile, Friend.class);
+		FriendDao dao = new FriendDao();
+		Friend reFriend = friend.reverse();
+		boolean r = dao.save(friend);
+		boolean r2 = dao.save(reFriend);
+		response.setCharacterEncoding("utf-8");
+		try {
+			response.getWriter().write(ResultUtil.getResultById(r&&r2?400:401).toJson());
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 查找所有好友
+	 * @param jsonFile
+	 * @param response
+	 */
+	@RequestMapping("/friend/query")
+	public void queryFriend(String jsonFile,HttpServletResponse response){
+		JSONObject object = new JSONObject(jsonFile);
+		long userId = object.getLong("userId");
+		FriendDao friendDao = new FriendDao();
+		java.util.List<FriendView> friendViews = friendDao.queryFriend(userId);
+		JSONArray array = new JSONArray();
+		for (FriendView friendView : friendViews) {
+			JSONObject fObject = new JSONObject(friendView.toJson());
+			array.put(fObject);
+		}
+		try {
+			response.getWriter().write(array.toString());
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/user/query")
+	public void queryUserById(String jsonFile,HttpServletResponse response) {
+		JSONObject object = new JSONObject(jsonFile);
+		long userId = object.getLong("userId");
+		User user = new UserDao().query(userId);
+		
 	}
 
 }

@@ -11,6 +11,7 @@ public class User implements Serializable {
 		this.phone = phone;
 		this.password = password;
 		name = phone;
+		rank=0;
 	}
 
 	public User() {
@@ -26,6 +27,14 @@ public class User implements Serializable {
 	private String phone;
 
 	private String password;
+	
+	private String gender;
+	
+	private String birthday;
+	
+	private String personalMessage;
+	
+	private int rank=0;
 
 
 	/**
@@ -96,6 +105,62 @@ public class User implements Serializable {
 		Gson gson = new Gson();
 		return gson.toJson(this, getClass());
 		
+	}
+
+	/**
+	 * @return gender
+	 */
+	public String getGender() {
+		return gender;
+	}
+
+	/**
+	 * @param gender 要设置的 gender
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	/**
+	 * @return birthday
+	 */
+	public String getBirthday() {
+		return birthday;
+	}
+
+	/**
+	 * @param birthday 要设置的 birthday
+	 */
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	/**
+	 * @return personalMessage
+	 */
+	public String getPersonalMessage() {
+		return personalMessage;
+	}
+
+	/**
+	 * @param personalMessage 要设置的 personalMessage
+	 */
+	public void setPersonalMessage(String personalMessage) {
+		this.personalMessage = personalMessage;
+	}
+
+	/**
+	 * @return rank
+	 */
+	public int getRank() {
+		return rank;
+	}
+
+	/**
+	 * @param rank 要设置的 rank
+	 */
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 
 }

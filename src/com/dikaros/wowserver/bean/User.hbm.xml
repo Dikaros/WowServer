@@ -11,6 +11,10 @@
 		<property name="name" column="user_name" not-null="false"/>
 		<property name="password" column="user_password"/>
 		<property name="phone" column="user_phone" />
+		<property name="gender" column="gender"></property>
+		<property name="birthday" column="birthday"></property>
+		<property name="personalMessage" column="personal_message"></property>
+		<property name="rank" column="rank"></property>
 	</class>
 
 </hibernate-mapping>
